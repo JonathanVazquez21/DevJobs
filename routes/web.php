@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VacanteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,12 @@ Route::get('/', function () {
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Ruta de vacantes
+Route::get('vacantes', [VacanteController::class, 'index'])->name('vacantes.index');
+Route::get('vacantes/create', [VacanteController::class, 'create'])->name('vacantes.create');
 
-Route::get('vacantes', [RecetaController::class, 'index'])->name('recetas.index');
+//Subir imagenes con Dropzone
+Route::post('/vacantes/imagen', [VacanteController::class, 'imagen'])->name('vacantes.imagen');
+Route::post('/vacantes/borrarimagen', [VacanteController::class, 'borrarimagen'])->name('vacantes.borrar');
+
+
