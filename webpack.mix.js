@@ -12,6 +12,9 @@ require('laravel-mix-tailwind');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .autoload({
+        jquery : ['$', 'window.jQuery', 'jQuery']
+    })
     .vue()
     .sass('resources/sass/app.scss', 'public/css')
     .tailwind();
