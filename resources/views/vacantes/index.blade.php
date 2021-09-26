@@ -7,7 +7,7 @@
 @section('content')
 <h1 class="text-2xl text-center mt-10">Administrar Vacantes</h1>
 @if (count($vacantes) > 0)
-    
+
 <div class="flex flex-col mt-10">
     <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
       <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
@@ -50,10 +50,14 @@
                 </span>
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                  <a 
-                      href="" 
+                  <a
+                      href="{{route('candidatos.index', ['id' => $vacante->id])}}"
                       class="text-gray-500 hover:text-gray-600"
-                  >   Candidatos</a>
+                  >   {{$vacante->candidatos->count()}} Candidatos
+
+
+
+                </a>
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
                     <a href="#" class="text-green-600 hover:text-green-900 mr-5">Editar</a>
@@ -63,14 +67,14 @@
             </tr>
             @endforeach
 
-           
+
           </tbody>
         </table>
       </div>
     </div>
-  </div> 
+  </div>
   {{$vacantes->links()}}
   @else
      <p class="text-center mt-10 text-gray-700">No tienes vacantes aún</p>
-  @endif  
+  @endif
 @endsection

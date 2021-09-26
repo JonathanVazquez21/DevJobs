@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VacanteController;
 use App\Http\Controllers\CandidatoController;
+use App\Http\Controllers\NotificacionesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +32,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Subir imagenes con Dropzone
     Route::post('/vacantes/imagen', [VacanteController::class, 'imagen'])->name('vacantes.imagen');
     Route::post('/vacantes/borrarimagen', [VacanteController::class, 'borrarimagen'])->name('vacantes.borrar');
+    //Notificaciones
+    Route::get('/notificaciones', 'App\Http\Controllers\NotificacionesController')->name('notificaciones');
+
 });
 
+
+//Enviar datos a la vacante
+Route::get('/candidatos/{id}', [CandidatoController::class, 'index'])->name('candidatos.index');
 Route::post('candidatos/store', [CandidatoController::class, 'store'])->name('candidatos.store');
 
 //Muestra los trabajos en el FrontEnd sin autenticación
