@@ -29,9 +29,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('vacantes', [VacanteController::class, 'index'])->name('vacantes.index');
     Route::get('vacantes/create', [VacanteController::class, 'create'])->name('vacantes.create');
     Route::post('vacantes', [VacanteController::class, 'store'])->name('vacantes.store');
+    Route::delete('/vacantes/{vacante}',[VacanteController::class,'destroy'])->name('vacantes.destroy');
+    Route::get('/vacantes/{vacante}/edit',[VacanteController::class,'edit'])->name('vacantes.edit');
+    Route::put('/vacantes/{vacante}', [VacanteController::class, 'update'])->name('vacantes.update');
     //Subir imagenes con Dropzone
     Route::post('/vacantes/imagen', [VacanteController::class, 'imagen'])->name('vacantes.imagen');
     Route::post('/vacantes/borrarimagen', [VacanteController::class, 'borrarimagen'])->name('vacantes.borrar');
+    //Cambiar estado de la vacante
+    Route::post('/vacantes/{vacante}', [VacanteController::class, 'estado'])->name('vacantes.estado');
+
     //Notificaciones
     Route::get('/notificaciones', 'App\Http\Controllers\NotificacionesController')->name('notificaciones');
 
