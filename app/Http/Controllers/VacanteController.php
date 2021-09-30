@@ -22,7 +22,7 @@ class VacanteController extends Controller
     public function index()
     {
          //$vacantes = auth()->user()->vacantes;
-        $vacantes = Vacante::where('user_id', auth()->user()->id)->Paginate(10);
+        $vacantes = Vacante::where('user_id', auth()->user()->id)->latest()->Paginate(10);
         return view('vacantes.index', compact('vacantes'));
     }
 
@@ -94,6 +94,8 @@ class VacanteController extends Controller
      */
     public function show(Vacante $vacante)
     {
+        // if ($vacante->activa === 0 ) return abort(404);
+
         return view('vacantes.show')->with('vacante',$vacante);
     }
 
@@ -206,5 +208,37 @@ class VacanteController extends Controller
             //Guardar en la BD
             $vacante->save();
             return response()->json(['respuesta' => 'Correcto']);
+    }
+
+    public function buscar(Request $request)
+    {
+
+        // validar
+        $data = $request->validate([
+            'categoria' => 'required',
+            'ubicacion' => 'required'
+        ]);
+
+        // aSIGNAR VALORES
+        $categoria = $data['categoria'];
+        $ubicacion = $data['ubicacion'];
+
+
+       $vacantes = Vacante::latest()
+           ->where('categoria_id', $categoria)
+           ->where('ubicacion_id', $ubicacion)
+           ->get();
+
+        // $vacantes = Vacante::where([
+        //     'categoria_id' => $categoria,
+        //     'ubicacion_id' => $ubicacion
+        // ])->get();
+
+        return view('buscar.index', compact('vacantes'));
+    }
+
+    public function resultados()
+    {
+        return "mostrando resultados";
     }
 }

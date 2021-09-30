@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InicioController;
 use App\Http\Controllers\VacanteController;
 use App\Http\Controllers\CandidatoController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\NotificacionesController;
 
 /*
@@ -17,11 +19,11 @@ use App\Http\Controllers\NotificacionesController;
 */
 Auth::routes(['verify' => true]);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Pagina de Inicio
+Route::get('/', 'App\Http\Controllers\InicioController')->name('Inicio');
+//Categorias
+Route::get('categorias/{categoria}', [CategoriaController::class, 'show'])->name('categorias.show');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Rutas Protegidas
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -53,6 +55,9 @@ Route::get('vacantes/{vacante}', [VacanteController::class, 'show'])->name('vaca
 
 
 
-
+// Muestra los trabajos en el front end sin autenticación
+Route::get('/busqueda/buscar', [VacanteController::class, 'resultados'])->name('vacantes.resultados');
+Route::post('/busqueda/buscar', [VacanteController::class, 'buscar'])->name('vacantes.buscar');
+Route::get('/vacantes/{vacante}', [VacanteController::class, 'show'])->name('vacantes.show');
 
 
