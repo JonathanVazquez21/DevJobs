@@ -23,14 +23,20 @@ Es un sistema de bolsa de vacantes, el cual te permite publicar una vacante,acti
 ```
 $ composer install
 $ copy NUL .env
-$ php artisan key:generate
 $ php artisan migrate
 $ php artisan db:seed
 $ npm i
+$ php artisan key:generate
 
 ```
 En el .env configurar las variables de entorno de la base de datos y del correo electronico, antes de correr las migraciones y los seeders.
 
 ### Screenshot
 ![Image text](/screenshot/1.png)
+![Image text](/screenshot/login.png)
+![Image text](/screenshot/registro.png)
+![Image text](/screenshot/dashboard.png)
+![Image text](/screenshot/show.png)
+![Image text](/screenshot/notificaciones.png)
+![Image text](/screenshot/candidatos.png)
 
